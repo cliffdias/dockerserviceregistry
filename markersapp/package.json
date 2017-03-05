@@ -1,0 +1,20 @@
+{
+  "name": "rmgtrackit",
+  "version": "1.0.1",
+  "description": "RMG RFID TrackIT API",
+  "private": true,
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "4.*",
+    "mongodb": "2.2.19",
+    "morgan": "1.8.0",
+    "socket.io": "0.9.10"
+  },
+  "scripts":{
+      "start": "node --use_strict app.js"
+  },
+  "engines" :{
+      "node" : "7.4.0",  
+      "npm" : "1.1.49"
+  }
+}

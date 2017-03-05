@@ -9,7 +9,7 @@ echo "Create Docker machine for Consul"
 echo 
 echo
 
-docker-machine create --driver google --google-project trackit-154823 --google-zone europe-west1-b --google-machine-type n1-standard-1 consul
+docker-machine create --driver google --google-project yourprojectid --google-zone europe-west1-b --google-machine-type n1-standard-1 consul
 
 export KV_IP=$(docker-machine ssh consul 'ifconfig ens4 | grep "inet addr" | cut -f 2 -d : | cut -d" " -f1')
 
@@ -27,7 +27,7 @@ echo "Create Docker machine for Master"
 echo 
 echo
 
-docker-machine create --driver google --google-project trackit-154823 --google-zone europe-west1-b --google-machine-type n1-standard-1 --swarm --swarm-master --swarm-discovery="consul://${KV_IP}:8500" --engine-opt="cluster-store=consul://${KV_IP}:8500" --engine-opt="cluster-advertise=ens4:2376" master
+docker-machine create --driver google --google-project yourprojectid --google-zone europe-west1-b --google-machine-type n1-standard-1 --swarm --swarm-master --swarm-discovery="consul://${KV_IP}:8500" --engine-opt="cluster-store=consul://${KV_IP}:8500" --engine-opt="cluster-advertise=ens4:2376" master
 
 export MASTER_IP=$(docker-machine ssh master 'ifconfig ens4 | grep "inet addr" | cut -f 2 -d : | cut -d" " -f1')
 
@@ -41,7 +41,7 @@ echo "Create Docker machine for Slave"
 echo 
 echo
 
-docker-machine create --driver google --google-project trackit-154823  --google-zone europe-west1-b --google-machine-type n1-standard-1 --swarm --swarm-discovery="consul://${KV_IP}:8500" --engine-opt="cluster-store=consul://${KV_IP}:8500" --engine-opt="cluster-advertise=ens4:2376" slave
+docker-machine create --driver google --google-project yourprojectid  --google-zone europe-west1-b --google-machine-type n1-standard-1 --swarm --swarm-discovery="consul://${KV_IP}:8500" --engine-opt="cluster-store=consul://${KV_IP}:8500" --engine-opt="cluster-advertise=ens4:2376" slave
 
 
 export SLAVE_IP=$(docker-machine ssh slave 'ifconfig ens4 | grep "inet addr" | cut -f 2 -d : | cut -d" " -f1')
